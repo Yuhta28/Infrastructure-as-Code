@@ -1,0 +1,42 @@
+---
+- name: libselinux-pythonとEPELレポジトリをインストール
+  yum:
+    name: ['libselinux-python', 'epel-release'] # loop will be removed in version 2.11
+    state: present
+  with_items:
+    - libselinux-python
+    - epel-release
+
+
+- name: Nginxをインストール
+  yum:
+    name: nginx
+    state: present
+
+- name: Nginxを起動
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: nginx.conf テンプレート展開
+  template:
+    src: nginx.j2.conf
+    dest: /etc/nginx/nginx.conf
+    validate: nginx -t -c %s
+  notify:
+    - Nginxをリロード
+
+- name: Nginx用グループを作成
+  group:
+    name: "{{ nginx_group }}"
+    system: true
+
+- name: Nginx用ユーザーを作成
+  user:
+    name: "{{ nginx_user }}"
+    home: /var/lib/nginx
+    shell: /sbin/nologin
+    groups: "{{ nginx_group }}"
+    append: true
+    system: true
