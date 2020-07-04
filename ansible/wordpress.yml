@@ -1,5 +1,5 @@
 ---
-- name: CentOS7にWordPressをセットアップ
+- name: Terraformで構築したAmazon LinuxにWordPressをセットアップ
   hosts: all
   become: true
   vars:

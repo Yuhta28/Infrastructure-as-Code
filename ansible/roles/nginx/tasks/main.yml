@@ -1,11 +1,10 @@
 ---
-- name: libselinux-pythonとEPELレポジトリをインストール
+- name: libselinux-pythonをインストール
   yum:
-    name: ['libselinux-python', 'epel-release'] # loop will be removed in version 2.11
+    name: libselinux-python
     state: present
   with_items:
     - libselinux-python
-    - epel-release
 
 
 - name: Nginxをインストール

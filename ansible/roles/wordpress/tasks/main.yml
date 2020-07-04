@@ -74,11 +74,3 @@
 - name: Nginx用設定ファイルをテスト
   command: nginx -t
   changed_when: false
-
-- name: FirewalldでWordPress稼働ポートを公開状態に設定
-  firewalld:
-    port: "{{ wordpress_port }}/tcp"
-    permanent: true
-    state: enabled
-  notify:
-    - Firewalldサービスの再起動
