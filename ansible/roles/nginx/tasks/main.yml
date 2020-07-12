@@ -7,9 +7,14 @@
     - libselinux-python
 
 
-- name: Nginxをインストール
+- name: amazon-linux-extrasでNginxをインストールを有効化
+  shell: "amazon-linux-extras enable nginx1"
+  changed_when: False
+
+- name: Nginxをインストールする
   yum:
     name: nginx
+    enablerepo: amzn2extra-nginx1
     state: present
 
 - name: Nginxを起動
