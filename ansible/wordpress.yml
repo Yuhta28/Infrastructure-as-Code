@@ -1,6 +1,6 @@
 ---
 - name: Terraformで構築したAmazon LinuxにWordPressをセットアップ
-  hosts: localhost
+  hosts: all
   become: true
   vars:
     db_name: wordpress
